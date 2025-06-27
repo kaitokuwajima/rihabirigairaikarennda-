@@ -1,89 +1,453 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
-
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/11.9.1/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/11.9.1/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/11.9.1/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外来リハビリテーション予約管理システム</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-      });
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #555; }
+        #modal-backdrop.hidden { display: none; }
+        .break-slot-visual {
+            background: linear-gradient(to top right, #e5e7eb calc(50% - 1px), #9ca3af, #e5e7eb calc(50% + 1px));
+            cursor: not-allowed;
+        }
+        .unit-button.selected {
+            background-color: #3b82f6; /* bg-blue-600 */
+            color: white;
+            border-color: #3b82f6;
+        }
+        .unit-button:not(.selected) {
+            background-color: white;
+            color: #374151; /* text-gray-700 */
+            border-color: #d1d5db; /* border-gray-300 */
+        }
+        .unit-button:disabled {
+            background-color: #f3f4f6; /* bg-gray-100 */
+            color: #9ca3af; /* text-gray-400 */
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 max-w-7xl">
+        <header class="bg-white shadow-md rounded-lg p-4 mb-6 flex flex-col sm:flex-row justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-600 mb-4 sm:mb-0">
+                <i class="fas fa-calendar-alt mr-2"></i>外来リハビリテーション予約管理
+            </h1>
+            <div class="flex items-center space-x-4">
+                <label for="date-picker" class="font-semibold">日付選択:</label>
+                <input type="date" id="date-picker" class="p-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            </div>
+        </header>
+
+        <main id="schedule-container" class="bg-white shadow-lg rounded-lg p-4 overflow-x-auto custom-scrollbar">
+            <div id="schedule-grid" class="grid" style="grid-template-columns: auto repeat(7, minmax(140px, 1fr));">
+                <!-- Grid is generated by JS -->
+            </div>
+            <div id="loading-spinner" class="hidden text-center p-8">
+                <i class="fas fa-spinner fa-spin text-4xl text-blue-500"></i>
+                <p class="mt-4 text-lg">データを読み込んでいます...</p>
+            </div>
+        </main>
+        
+        <footer class="text-center mt-6 text-sm text-gray-500">
+            <p>UID: <span id="user-id-display"></span></p>
+            <p>&copy; 2024 Rehab Reservation System</p>
+        </footer>
+    </div>
+
+    <!-- Reservation Modal -->
+    <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50">
+        <div id="reservation-modal" class="bg-white rounded-lg shadow-2xl p-8 w-11/12 max-w-md transform transition-all scale-95 opacity-0">
+            <h2 class="text-xl font-bold mb-4" id="modal-title">予約情報</h2>
+            <p class="mb-2"><strong>時間:</strong> <span id="modal-time"></span></p>
+            <p class="mb-4"><strong>担当:</strong> <span id="modal-therapist"></span></p>
+            <div class="mb-4">
+                <label for="patient-name" class="block font-semibold mb-2">患者様の名前:</label>
+                <input type="text" id="patient-name" placeholder="例: 鈴木 一郎" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            </div>
+            <div>
+                <label class="block font-semibold mb-2">単位:</label>
+                <div class="flex space-x-2">
+                    <button id="unit-1-button" data-units="1" class="unit-button flex-1 px-4 py-2 rounded-lg font-semibold border-2 transition-colors">1単位</button>
+                    <button id="unit-2-button" data-units="2" class="unit-button flex-1 px-4 py-2 rounded-lg font-semibold border-2 transition-colors">2単位</button>
+                </div>
+            </div>
+            <div class="mt-6 flex justify-end space-x-4">
+                <button id="cancel-button" class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg font-semibold">キャンセル</button>
+                <button id="delete-button" class="px-4 py-2 bg-red-500 text-white hover:bg-red-600 rounded-lg font-semibold hidden"><i class="fas fa-trash-alt mr-2"></i>削除</button>
+                <button id="save-button" class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg font-semibold"><i class="fas fa-save mr-2"></i>保存</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, deleteDoc, collection, query, where, onSnapshot, getDocs, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- Config ---
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : { apiKey: "YOUR_API_KEY", authDomain: "YOUR_AUTH_DOMAIN", projectId: "YOUR_PROJECT_ID" };
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'rehab-reservation-system';
+
+        const TIME_SLOTS = ["09:00", "09:25", "09:50", "10:10", "10:35", "10:55", "11:20", "11:40", "12:05"];
+        const THERAPIST_COUNT = 7;
+        const BREAK_IDENTIFIER = '__BREAK__';
+        const CONTINUATION_IDENTIFIER = -1;
+
+        // --- Firebase Init ---
+        let app, db, auth, userId, unsubscribeReservations;
+        let isAuthReady = false;
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+        } catch (e) {
+            console.error("Firebase Init Error:", e);
+            document.getElementById('schedule-container').innerHTML = '<p class="text-red-500 text-center">System initialization error.</p>';
+        }
+
+        // --- DOM Elements ---
+        const datePicker = document.getElementById('date-picker');
+        const scheduleGrid = document.getElementById('schedule-grid');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const userIdDisplay = document.getElementById('user-id-display');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modal = document.getElementById('reservation-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalTime = document.getElementById('modal-time');
+        const modalTherapist = document.getElementById('modal-therapist');
+        const patientNameInput = document.getElementById('patient-name');
+        const saveButton = document.getElementById('save-button');
+        const deleteButton = document.getElementById('delete-button');
+        const cancelButton = document.getElementById('cancel-button');
+        const unitButtons = document.querySelectorAll('.unit-button');
+        const twoUnitButton = document.getElementById('unit-2-button');
+
+        // --- State ---
+        let currentEditingSlot = null;
+        let reservations = {};
+        let selectedUnits = 1;
+
+        // --- Auth ---
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // User is signed in, initialize the app
+                userId = user.uid;
+                userIdDisplay.textContent = userId;
+                if (!isAuthReady) {
+                    isAuthReady = true;
+                    initialize();
+                }
+            } else {
+                // No user is signed in, so attempt to sign in.
+                console.log("No user signed in. Attempting sign-in...");
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        // Try with custom token first
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        // Fallback to anonymous
+                        await signInAnonymously(auth);
+                    }
+                } catch (error) {
+                    console.error("Custom token sign-in failed, falling back to anonymous:", error);
+                    try {
+                        await signInAnonymously(auth);
+                    } catch (anonError) {
+                        console.error("Anonymous sign-in also failed:", anonError);
+                    }
+                }
+            }
+        });
+        
+        // --- Main Initialization ---
+        function initialize() {
+            if(!isAuthReady || !db) return;
+            const today = new Date();
+            datePicker.value = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+            renderScheduleGrid();
+            const initialDate = datePicker.value;
+            attachReservationListener(initialDate);
+            checkAndGenerateBreaks(initialDate);
+            datePicker.addEventListener('change', () => {
+                const newDate = datePicker.value;
+                attachReservationListener(newDate);
+                checkAndGenerateBreaks(newDate);
+            });
+            setupModalListeners();
+        }
+        
+        // --- Break Time Generation ---
+        async function checkAndGenerateBreaks(date) {
+            if (!isAuthReady) return;
+            const reservationsCol = collection(db, 'artifacts', appId, 'public', 'data', 'reservations');
+            const qBreaks = query(reservationsCol, where("date", "==", date), where("patientName", "==", BREAK_IDENTIFIER));
+            const breakSnapshot = await getDocs(qBreaks);
+            if (breakSnapshot.empty) {
+                await generateAndSaveBreaks(date);
+            }
+        }
+
+        async function generateAndSaveBreaks(date) {
+            const batch = writeBatch(db);
+            const shuffledTimeSlots = [...TIME_SLOTS].sort(() => 0.5 - Math.random());
+            for (let i = 1; i <= THERAPIST_COUNT; i++) {
+                const breakTime = shuffledTimeSlots.pop();
+                if (breakTime) {
+                    const docId = `${date}-${i}-${breakTime}`;
+                    const breakData = { date, therapistId: String(i), timeSlot: breakTime, patientName: BREAK_IDENTIFIER, updatedAt: new Date(), updatedBy: 'system' };
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'reservations', docId);
+                    batch.set(docRef, breakData);
+                }
+            }
+            await batch.commit();
+        }
+
+        // --- Firestore Listener ---
+        function attachReservationListener(date) {
+            if (unsubscribeReservations) unsubscribeReservations();
+            loadingSpinner.classList.remove('hidden');
+            scheduleGrid.classList.add('hidden');
+            const reservationsCol = collection(db, 'artifacts', appId, 'public', 'data', 'reservations');
+            const q = query(reservationsCol, where("date", "==", date));
+            unsubscribeReservations = onSnapshot(q, (snapshot) => {
+                reservations = {};
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    if (!reservations[data.therapistId]) reservations[data.therapistId] = {};
+                    reservations[data.therapistId][data.timeSlot] = { patientName: data.patientName, units: data.units };
+                });
+                renderReservations();
+                loadingSpinner.classList.add('hidden');
+                scheduleGrid.classList.remove('hidden');
+            }, (error) => {
+                console.error("Error fetching reservations:", error);
+                loadingSpinner.innerHTML = '<p class="text-red-500">Failed to load reservations.</p>';
+            });
+        }
+
+        // --- UI Rendering ---
+        function renderScheduleGrid() {
+            scheduleGrid.innerHTML = ''; 
+            const cornerCell = document.createElement('div');
+            cornerCell.className = "sticky top-0 left-0 bg-gray-200 z-20 p-2 border-b border-r border-gray-300";
+            scheduleGrid.appendChild(cornerCell);
+
+            for (let i = 1; i <= THERAPIST_COUNT; i++) {
+                const header = document.createElement('div');
+                header.className = "sticky top-0 bg-gray-200 p-2 font-bold text-center border-b border-r border-gray-300 z-10";
+                header.textContent = `スタッフ ${i}`;
+                scheduleGrid.appendChild(header);
+            }
+
+            TIME_SLOTS.forEach(time => {
+                const timeLabel = document.createElement('div');
+                timeLabel.className = "sticky left-0 bg-gray-100 p-2 font-semibold text-center border-b border-r border-gray-300 z-10";
+                timeLabel.textContent = time;
+                scheduleGrid.appendChild(timeLabel);
+                for (let i = 1; i <= THERAPIST_COUNT; i++) {
+                    const cell = document.createElement('div');
+                    cell.className = "p-1 border-b border-r border-gray-300 min-h-[60px]";
+                    cell.innerHTML = `<button data-therapist-id="${i}" data-time-slot="${time}" class="w-full h-full text-sm rounded-md"></button>`;
+                    scheduleGrid.appendChild(cell);
+                }
+            });
+            scheduleGrid.addEventListener('click', handleSlotClick);
+        }
+
+        function renderReservations() {
+            scheduleGrid.querySelectorAll('button[data-time-slot]').forEach(button => {
+                const { therapistId, timeSlot } = button.dataset;
+                const reservation = reservations[therapistId]?.[timeSlot];
+                const patientName = reservation?.patientName;
+                const units = reservation?.units;
+
+                button.disabled = false;
+                const baseClass = "w-full h-full text-sm transition-colors duration-200 p-2 break-words font-bold";
+                
+                if (patientName === BREAK_IDENTIFIER) {
+                    button.textContent = '';
+                    button.className = `${baseClass} break-slot-visual rounded-md`;
+                    button.disabled = true;
+                } else if (units === CONTINUATION_IDENTIFIER) {
+                    button.textContent = '';
+                    button.className = `${baseClass} bg-blue-200 text-blue-800 rounded-b-md rounded-t-none`;
+                    button.disabled = true;
+                } else if (patientName) {
+                    const isTwoUnits = units === 2;
+                    button.textContent = patientName;
+                    button.className = `${baseClass} bg-blue-200 hover:bg-blue-300 text-blue-800 ${isTwoUnits ? 'rounded-t-md rounded-b-none' : 'rounded-md'}`;
+                } else {
+                    button.textContent = '予約可';
+                    button.className = "w-full h-full text-sm rounded-md transition-colors duration-200 bg-green-100 hover:bg-green-200 text-green-800 font-semibold flex justify-center items-center";
+                }
+            });
+        }
+
+        // --- Event Handlers ---
+        function handleSlotClick(event) {
+            const target = event.target.closest('button[data-time-slot]');
+            if (!target || target.disabled) return;
+
+            const { therapistId, timeSlot } = target.dataset;
+            let actualTimeSlot = timeSlot;
+            
+            const timeSlotIndex = TIME_SLOTS.indexOf(timeSlot);
+            if(timeSlotIndex > 0){
+                const prevTimeSlot = TIME_SLOTS[timeSlotIndex - 1];
+                const prevReservation = reservations[therapistId]?.[prevTimeSlot];
+                 if(reservations[therapistId]?.[timeSlot]?.units === CONTINUATION_IDENTIFIER && prevReservation?.units === 2){
+                    actualTimeSlot = prevTimeSlot;
+                }
+            }
+            
+            const reservation = reservations[therapistId]?.[actualTimeSlot];
+            const patientName = reservation?.patientName || '';
+            const units = reservation?.units || 1;
+            
+            currentEditingSlot = { therapistId, timeSlot: actualTimeSlot };
+            modalTime.textContent = actualTimeSlot;
+            modalTherapist.textContent = `スタッフ ${therapistId}`;
+            patientNameInput.value = patientName;
+            
+            if (patientName) {
+                modalTitle.textContent = "予約の編集・削除";
+                deleteButton.classList.remove('hidden');
+                setSelectedUnit(units);
+            } else {
+                modalTitle.textContent = "新規予約作成";
+                deleteButton.classList.add('hidden');
+                setSelectedUnit(1);
+            }
+
+            const nextTimeSlotIndex = TIME_SLOTS.indexOf(actualTimeSlot) + 1;
+            const nextTimeSlot = TIME_SLOTS[nextTimeSlotIndex];
+            const isNextSlotAvailable = nextTimeSlot && !reservations[therapistId]?.[nextTimeSlot];
+            twoUnitButton.disabled = !isNextSlotAvailable && !(units === 2);
+            
+            openModal();
+        }
+
+        // --- Modal Control ---
+        function openModal() {
+            modalBackdrop.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('scale-95', 'opacity-0');
+                modal.classList.add('scale-100', 'opacity-100');
+                patientNameInput.focus();
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.classList.add('scale-95', 'opacity-0');
+            modal.classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => {
+                modalBackdrop.classList.add('hidden');
+            }, 200);
+        }
+
+        function setSelectedUnit(units) {
+            selectedUnits = parseInt(units, 10);
+            unitButtons.forEach(btn => {
+                btn.classList.toggle('selected', parseInt(btn.dataset.units, 10) === selectedUnits);
+            });
+        }
+
+        function setupModalListeners() {
+            unitButtons.forEach(button => button.addEventListener('click', () => {
+                if (!button.disabled) setSelectedUnit(button.dataset.units);
+            }));
+            saveButton.addEventListener('click', saveReservation);
+            deleteButton.addEventListener('click', deleteReservation);
+            cancelButton.addEventListener('click', closeModal);
+            modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modalBackdrop.classList.contains('hidden')) closeModal(); });
+        }
+
+        // --- Data Operations ---
+        async function saveReservation() {
+            if (!currentEditingSlot || !isAuthReady) return;
+            const { therapistId, timeSlot } = currentEditingSlot;
+            const patientName = patientNameInput.value.trim();
+            if (!patientName) { alert("患者様の名前を入力してください。"); return; }
+            
+            saveButton.disabled = true;
+            saveButton.textContent = '保存中...';
+            
+            const batch = writeBatch(db);
+            const selectedDate = datePicker.value;
+            const originalReservation = reservations[therapistId]?.[timeSlot];
+
+            if (originalReservation?.units === 2) {
+                const nextTimeSlot = TIME_SLOTS[TIME_SLOTS.indexOf(timeSlot) + 1];
+                if (nextTimeSlot) {
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'reservations', `${selectedDate}-${therapistId}-${nextTimeSlot}`);
+                    batch.delete(docRef);
+                }
+            }
+            
+            const primaryDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'reservations', `${selectedDate}-${therapistId}-${timeSlot}`);
+            const commonData = { date: selectedDate, therapistId, patientName, updatedAt: new Date(), updatedBy: userId };
+
+            if (selectedUnits === 2) {
+                const nextTimeSlot = TIME_SLOTS[TIME_SLOTS.indexOf(timeSlot) + 1];
+                const nextSlotDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'reservations', `${selectedDate}-${therapistId}-${nextTimeSlot}`);
+                batch.set(primaryDocRef, { ...commonData, timeSlot, units: 2 });
+                batch.set(nextSlotDocRef, { ...commonData, timeSlot: nextTimeSlot, units: CONTINUATION_IDENTIFIER });
+            } else {
+                batch.set(primaryDocRef, { ...commonData, timeSlot, units: 1 });
+            }
+
+            try { await batch.commit(); } catch (error) { console.error("Save Error:", error); alert("予約の保存中にエラーが発生しました。"); }
+            finally {
+                saveButton.disabled = false;
+                saveButton.innerHTML = '<i class="fas fa-save mr-2"></i>保存';
+                closeModal();
+            }
+        }
+
+        async function deleteReservation() {
+            if (!currentEditingSlot || !isAuthReady) return;
+            deleteButton.disabled = true;
+            deleteButton.textContent = '削除中...';
+            
+            const { therapistId, timeSlot } = currentEditingSlot;
+            const originalReservation = reservations[therapistId]?.[timeSlot];
+            const selectedDate = datePicker.value;
+            const batch = writeBatch(db);
+
+            const primaryDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'reservations', `${selectedDate}-${therapistId}-${timeSlot}`);
+            batch.delete(primaryDocRef);
+
+            if (originalReservation?.units === 2) {
+                const nextTimeSlot = TIME_SLOTS[TIME_SLOTS.indexOf(timeSlot) + 1];
+                if(nextTimeSlot) {
+                    const nextSlotDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'reservations', `${selectedDate}-${therapistId}-${nextTimeSlot}`);
+                    batch.delete(nextSlotDocRef);
+                }
+            }
+            
+            try { await batch.commit(); } catch (error) { console.error("Delete Error:", error); alert("予約の削除中にエラーが発生しました。"); }
+            finally {
+                deleteButton.disabled = false;
+                deleteButton.innerHTML = '<i class="fas fa-trash-alt mr-2"></i>削除';
+                closeModal();
+            }
+        }
     </script>
-  </body>
+</body>
 </html>
